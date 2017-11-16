@@ -10,7 +10,7 @@ class aws_gw::config {
     mode    => '0600',
     content => template('aws_gw/ipsec.conf.erb');
   }
-  file {'ipsec.conf':
+  file {'ipsec.secrets':
     ensure  => file,
     path    => $aws_gw::params::secrets_conf_path,
     owner   => 'root',
