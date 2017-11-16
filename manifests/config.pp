@@ -1,7 +1,7 @@
 # Class: aws_gw::config
 #
 # This class configures strongswan and quagga
-class aws_gw::config {
+class aws_gw::config inherits aws_gw {
   file {'ipsec.conf':
     ensure  => file,
     path    => $aws_gw::params::ipsec_conf_path,
