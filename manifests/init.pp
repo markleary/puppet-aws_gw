@@ -26,8 +26,24 @@
 #    The Outside IP Address provided in the AWS VPN configuration download for
 #    IPSec Tunnel #2.
 #
-#  [*customer_gw*]
+#  [*outside_cg*]
 #    Your public facing customer gateway ip address.
+#
+#  [*inside_vpg_1*]
+#    The inside virtual private gateway address provided in the AWS VPN
+#    configuration download for IPSec Tunnel #1.
+#
+#  [*inside_vpg_2*]
+#    The inside virtual private gateway address provided in the AWS VPN
+#    configuration download for IPSec Tunnel #2.
+#
+#  [*inside_cg_1*]
+#    The inside customer gateway address provided in the AWS VPN configuration
+#    download for IPSec Tunnel #1.
+#
+#  [*inside_cg_2*]
+#    The inside customer gateway address provided in the AWS VPN configuration
+#    download for IPSec Tunnel #2.
 #
 #  [*local_if*]
 #    The network interface bound to the private network.
@@ -39,7 +55,11 @@ class aws_gw(
   String $pre_shared_key_2                                   = undef,
   String $outside_vpg_1                                      = undef,
   String $outside_vpg_2                                      = undef,
-  String $customer_gw                                        = $::ipaddress,
+  String $outside_cg                                         = $::ipaddress,
+  String $inside_vpg_1                                       = undef,
+  String $inside_vpg_2                                       = undef,
+  String $inside_cg_1                                        = undef,
+  String $inside_cg_2                                        = undef,
   String $private_if                                         = 'eth1',
 ){
   include ::aws_gw::params

@@ -30,15 +30,16 @@ conn %default
 	installpolicy=yes
 	compress=no
 	mobike=no
+  leftupdown=/etc/strongswan/ipsec-vti.sh
 
 conn AWS-VPC-GW1
-	left=<%= @customer_gw %>
+	left=<%= @outside_cg %>
 	right=<%= @outside_vpg_1 %>
 	auto=start
 	mark=100
 
 conn AWS-VPC-GW2
-	left=<%= @customer_gw %>
+	left=<%= @outside_cg %>
 	right=<%= @outside_vpg_2 %>
 	auto=start
 	mark=200

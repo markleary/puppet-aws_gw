@@ -11,8 +11,10 @@ class aws_gw::params {
           if (versioncmp($::operatingsystemmajrelease, '7') >= 0) {
             $ss_service        = 'strongswan'
             $ss_package        = 'strongswan'
+            $conf_path         = '/etc/strongswan'
             $ipsec_conf_path   = '/etc/strongswan/ipsec.conf'
             $secrets_conf_path = '/etc/strongswan/ipsec.secrets'
+            $charon_conf_path = '/etc/strongswan/strongswan.d/charon.conf'
             $q_package         = 'quagga'
             $zebra_service     = 'zebra'
             $bgpd_service      = 'bgpd'
