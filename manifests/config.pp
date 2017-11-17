@@ -26,7 +26,7 @@ class aws_gw::config inherits aws_gw {
     path    => "${aws_gw::params::conf_path}/ipsec-vti.sh",
     owner   => 'root',
     group   => 'root',
-    mode    => '0600',
+    mode    => '0700',
     content => template('aws_gw/ipsec-vti.sh.erb');
   }
 
