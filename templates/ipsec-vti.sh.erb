@@ -32,7 +32,6 @@ case "${PLUTO_VERB}" in
         $IP route flush table 220
         ;;
     down-client)
-        #$IP tunnel del ${VTI_INTERFACE}
         $IP link del ${VTI_INTERFACE}
         #$IPTABLES -t mangle -D FORWARD -o ${VTI_INTERFACE} -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
         #$IPTABLES -t mangle -D INPUT -p esp -s ${PLUTO_PEER} -d ${PLUTO_ME} -j MARK --set-xmark ${PLUTO_MARK_IN}
