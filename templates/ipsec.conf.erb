@@ -30,7 +30,7 @@ conn %default
 	installpolicy=yes
 	compress=no
 	mobike=no
-  leftupdown=<%= scope['aws_gs::params::conf_path'] %>/ipsec-vti.sh
+  leftupdown=<%= scope['aws_gs']['params']['conf_path'] %>/ipsec-vti.sh
 
 conn AWS-VPC-GW1
 	left=<%= @outside_cg %>
