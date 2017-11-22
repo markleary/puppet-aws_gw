@@ -1,0 +1,14 @@
+hostname <%= @hostname %>
+password <%= @quagga_pw %>
+enable password <%= @quagga_pw %>
+!
+! Configure interfaces
+interface ens224
+interface vif1
+interface vif2
+! Change preferred source ip address of received routes
+route-map RM_SET_SRC permit 10
+  set src <%= @gateway_ip %>
+ip protocol bgp route-map RM_SET_SRC
+!
+line vty

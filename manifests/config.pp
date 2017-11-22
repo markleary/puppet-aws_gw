@@ -5,7 +5,7 @@ class aws_gw::config inherits aws_gw {
 
   file {'ipsec.conf':
     ensure  => file,
-    path    => $aws_gw::params::ipsec_conf_path,
+    path    => $aws_gw::ipsec_conf_path,
     owner   => 'root',
     group   => 'root',
     mode    => '0600',
@@ -14,7 +14,7 @@ class aws_gw::config inherits aws_gw {
 
   file {'ipsec.secrets':
     ensure  => file,
-    path    => $aws_gw::params::secrets_conf_path,
+    path    => $aws_gw::secrets_conf_path,
     owner   => 'root',
     group   => 'root',
     mode    => '0600',
@@ -23,7 +23,7 @@ class aws_gw::config inherits aws_gw {
 
   file {'ipsec-vti.sh':
     ensure  => file,
-    path    => "${aws_gw::params::conf_path}/ipsec-vti.sh",
+    path    => "${aws_gw::conf_path}/ipsec-vti.sh",
     owner   => 'root',
     group   => 'root',
     mode    => '0700',
@@ -32,11 +32,20 @@ class aws_gw::config inherits aws_gw {
 
   file {'charon.conf':
     ensure  => file,
-    path    => $aws_gw::params::charon_conf_path,
+    path    => $aws_gw::charon_conf_path,
     owner   => 'root',
     group   => 'root',
     mode    => '0600',
     content => template('aws_gw/charon.conf.erb');
+  }
+
+  file {'zebra.conf':
+    ensure  => file,
+    path    => $aws_gw::zebra_conf_path,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => template('aws_gw/zebra.conf.erb');
   }
 
   sysctl { 'net.ipv4.ip_forward':

@@ -14,7 +14,9 @@ class aws_gw::params {
             $conf_path         = '/etc/strongswan'
             $ipsec_conf_path   = '/etc/strongswan/ipsec.conf'
             $secrets_conf_path = '/etc/strongswan/ipsec.secrets'
-            $charon_conf_path = '/etc/strongswan/strongswan.d/charon.conf'
+            $charon_conf_path  = '/etc/strongswan/strongswan.d/charon.conf'
+            $zebra_conf_path   = '/etc/quagga/zebra.conf'
+            $bgpd_conf_path    = '/etc/quagga/bgpd.conf'
             $q_package         = 'quagga'
             $zebra_service     = 'zebra'
             $bgpd_service      = 'bgpd'
@@ -26,5 +28,7 @@ class aws_gw::params {
     }
     default: { fail("unsupported platform ${::osfamily}") }
   }
+
+  $quagga_pw = fqdn_rand_string(10)
 
 }

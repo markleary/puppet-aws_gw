@@ -48,6 +48,13 @@
 #  [*local_if*]
 #    The network interface bound to the private network.
 #
+#  [*quaga_pw*]
+#    Quagga password.  If not defined, will use fqdn_rand_string() to generate
+#    random password.
+#
+#  [*gateway_ip*]
+#    The ip address of the local quagga router.
+#
 
 class aws_gw(
   String $pre_shared_key_1,
@@ -58,6 +65,7 @@ class aws_gw(
   String $inside_vpg_2,
   String $inside_cg_1,
   String $inside_cg_2,
+  String $gateway_ip,
   String $outside_cg        = $::ipaddress,
   String $private_if        = 'eth1',
   Pattern[/present|absent|installed|latest/] $package_manage = 'present',
@@ -67,9 +75,12 @@ class aws_gw(
   String $ipsec_conf_path   = $aws_gw::params::ipsec_conf_path,
   String $secrets_conf_path = $aws_gw::params::secrets_conf_path,
   String $charon_conf_path  = $aws_gw::params::charon_conf_path,
+  String $zebra_conf_path   = $aws_gw::params::zebra_conf_path,
+  String $bgpd_conf_path    = $aws_gw::params::bgpd_conf_path,
   String $q_package         = $aws_gw::params::q_package,
   String $zebra_service     = $aws_gw::params::zebra_service,
   String $bgpd_service      = $aws_gw::params::bgpd_service,
+  String $quagga_pw         = $aws_gw::params::quagga_pw,
 ) inherits aws_gw::params {
 
   anchor { 'aws_gw::begin:': }
