@@ -50,28 +50,36 @@
 #
 
 class aws_gw(
+  String $pre_shared_key_1,
+  String $pre_shared_key_2,
+  String $outside_vpg_1,
+  String $outside_vpg_2,
+  String $inside_vpg_1,
+  String $inside_vpg_2,
+  String $inside_cg_1,
+  String $inside_cg_2,
+  String $outside_cg        = $::ipaddress,
+  String $private_if        = 'eth1',
   Pattern[/present|absent|installed|latest/] $package_manage = 'present',
-  String $pre_shared_key_1                                   = undef,
-  String $pre_shared_key_2                                   = undef,
-  String $outside_vpg_1                                      = undef,
-  String $outside_vpg_2                                      = undef,
-  String $outside_cg                                         = $::ipaddress,
-  String $inside_vpg_1                                       = undef,
-  String $inside_vpg_2                                       = undef,
-  String $inside_cg_1                                        = undef,
-  String $inside_cg_2                                        = undef,
-  String $private_if                                         = 'eth1',
-){
-  include ::aws_gw::params
+  String $ss_service        = $aws_gw::params::ss_service,
+  String $ss_package        = $aws_gw::params::ss_package,
+  String $conf_path         = $aws_gw::params::conf_path,
+  String $ipsec_conf_path   = $aws_gw::params::ipsec_conf_path,
+  String $secrets_conf_path = $aws_gw::params::secrets_conf_path,
+  String $charon_conf_path  = $aws_gw::params::charon_conf_path,
+  String $q_package         = $aws_gw::params::q_package,
+  String $zebra_service     = $aws_gw::params::zebra_service,
+  String $bgpd_service      = $aws_gw::params::bgpd_service,
+) inherits aws_gw::params {
 
   anchor { 'aws_gw::begin:': }
   -> package { 'strongwan':
     ensure => $package_manage,
-    name   => $aws_gw::params::ss_package,
+    name   => $ss_package,
   }
   -> package { 'quagga':
     ensure => $package_manage,
-    name   => $aws_gw::params::q_package,
+    name   => $q_package,
   }
   -> class { 'aws_gw::config': }
   -> anchor { 'aws_gw::end': }
