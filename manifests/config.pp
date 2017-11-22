@@ -42,18 +42,18 @@ class aws_gw::config inherits aws_gw {
   file {'zebra.conf':
     ensure  => file,
     path    => $aws_gw::zebra_conf_path,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
+    owner   => 'quagga',
+    group   => 'quagga',
+    mode    => '0640',
     content => template('aws_gw/zebra.conf.erb');
   }
 
   file {'bgpd.conf':
     ensure  => file,
     path    => $aws_gw::bgpd_conf_path,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
+    owner   => 'quagga',
+    group   => 'quagga',
+    mode    => '0640',
     content => template('aws_gw/bgpd.conf.erb');
   }
 
