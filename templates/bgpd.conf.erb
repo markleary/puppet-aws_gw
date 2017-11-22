@@ -1,0 +1,27 @@
+# * Managed by Puppet, do not modify *
+
+hostname <%= @hostname %>
+password <%= @quagga_pw %>
+enable password <%= @quagga_pw %>
+!
+log file /var/log/quagga/bgpd
+!debug bgp events
+!debug bgp zebra
+debug bgp updates
+!
+router bgp <%= @asn_cg %>
+  bgp router-id <%= @gateway_ip %>
+  network <%= @internal_lan %>
+  network <%= @inside_cg_1 %>
+  network <%= @inside_cg_2 %>
+  !
+  ! aws tunnel #1 neighbour
+  neighbor 169.254.46.21 remote-as <%= @asn_vpg %>
+  !
+  ! aws tunnel #2 neighbour
+  neighbor 169.254.47.213 remote-as <%= @asn_vpg %>
+!
+route-map RM_LOWER_PRIORITY permit 10
+  set as-path prepend 65000 65000 65000
+!
+line vty

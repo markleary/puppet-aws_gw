@@ -48,6 +48,15 @@ class aws_gw::config inherits aws_gw {
     content => template('aws_gw/zebra.conf.erb');
   }
 
+  file {'bgpd.conf':
+    ensure  => file,
+    path    => $aws_gw::bgpd_conf_path,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => template('aws_gw/bgpd.conf.erb');
+  }
+
   sysctl { 'net.ipv4.ip_forward':
     ensure => present,
     value  => '1',

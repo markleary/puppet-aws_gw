@@ -1,9 +1,11 @@
+# * Managed by Puppet, do not modify *
+
 hostname <%= @hostname %>
 password <%= @quagga_pw %>
 enable password <%= @quagga_pw %>
 !
 ! Configure interfaces
-interface ens224
+interface <%= @private_if %>
 interface vif1
 interface vif2
 ! Change preferred source ip address of received routes

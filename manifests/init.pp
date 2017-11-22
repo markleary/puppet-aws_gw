@@ -46,7 +46,7 @@
 #    download for IPSec Tunnel #2.
 #
 #  [*local_if*]
-#    The network interface bound to the private network.
+#    The network interface bound to the local private lan.
 #
 #  [*quaga_pw*]
 #    Quagga password.  If not defined, will use fqdn_rand_string() to generate
@@ -54,6 +54,17 @@
 #
 #  [*gateway_ip*]
 #    The ip address of the local quagga router.
+#
+#  [*internal_lan*]
+#    Your local private lan which will be routed to AWS.  Must be in cidr
+#    format (e.g. 192.168.1.0/24).
+#
+#  [*asn_cg*]
+#    The Customer Gateway ASN provided in the AWS VPN configuration download.
+#
+#  [*asn_vpg*]
+#    The Virtual Private Gateway ASN provided in the AWS VPN configuration
+#    download.
 #
 
 class aws_gw(
@@ -66,6 +77,9 @@ class aws_gw(
   String $inside_cg_1,
   String $inside_cg_2,
   String $gateway_ip,
+  String $internal_lan,
+  String $asn_cg,
+  String $asn_vpg,
   String $outside_cg        = $::ipaddress,
   String $private_if        = 'eth1',
   Pattern[/present|absent|installed|latest/] $package_manage = 'present',
