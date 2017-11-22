@@ -3,8 +3,8 @@
 # This class configures strongswan and quagga
 class aws_gw::config inherits aws_gw {
 
-  $inside_vpg_1_ip = regsubst($aws_gs::inside_vpg_1,'^(\d+\.\d+\.\d+\.\d+)\/\d{1,2}$','\1')
-  $inside_vpg_2_ip = regsubst($aws_gs::inside_vpg_2,'^(\d+\.\d+\.\d+\.\d+)\/\d{1,2}$','\1')
+  $inside_vpg_1_ip = regsubst($aws_gw::inside_vpg_1,'^(\d+\.\d+\.\d+\.\d+)\/\d{1,2}$','\1')
+  $inside_vpg_2_ip = regsubst($aws_gw::inside_vpg_2,'^(\d+\.\d+\.\d+\.\d+)\/\d{1,2}$','\1')
 
   file {'ipsec.conf':
     ensure  => file,
