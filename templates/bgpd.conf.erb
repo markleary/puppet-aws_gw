@@ -16,10 +16,10 @@ router bgp <%= @asn_cg %>
   network <%= @inside_cg_2 %>
   !
   ! aws tunnel #1 neighbour
-  neighbor <%= @inside_vpg_1 %> remote-as <%= @asn_vpg %>
+  neighbor <%= @inside_vpg_1_ip %> remote-as <%= @asn_vpg %>
   !
   ! aws tunnel #2 neighbour
-  neighbor <%= @inside_vpg_2 %> remote-as <%= @asn_vpg %>
+  neighbor <%= @inside_vpg_2_ip %> remote-as <%= @asn_vpg %>
 !
 route-map RM_LOWER_PRIORITY permit 10
   set as-path prepend 65000 65000 65000
