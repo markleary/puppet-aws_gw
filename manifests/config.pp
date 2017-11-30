@@ -60,7 +60,15 @@ class aws_gw::config inherits aws_gw {
     content => template('aws_gw/bgpd.conf.erb');
   }
 
-  sysctl { 'net.ipv4.ip_forward':
+  sysctl { "net.ipv4.conf.${aws_gw::private_if}.forwarding":
+    ensure => present,
+    value  => '1',
+  }
+  sysctl { 'net.ipv4.conf.vti1.forwarding':
+    ensure => present,
+    value  => '1',
+  }
+  sysctl { 'net.ipv4.conf.vti2.forwarding':
     ensure => present,
     value  => '1',
   }
