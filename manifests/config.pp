@@ -64,14 +64,6 @@ class aws_gw::config inherits aws_gw {
     ensure => present,
     value  => '1',
   }
-  sysctl { 'net.ipv4.conf.vti1.forwarding':
-    ensure => present,
-    value  => '1',
-  }
-  sysctl { 'net.ipv4.conf.vti2.forwarding':
-    ensure => present,
-    value  => '1',
-  }
   sysctl { "net.ipv4.conf.${aws_gw::private_if}.disable_xfrm":
     ensure => present,
     value  => '1',
