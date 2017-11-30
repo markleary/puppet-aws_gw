@@ -42,4 +42,19 @@ class aws_gw::firewall inherits aws_gw {
     jump              => 'TCPMSS',
   }
 
+  firewall { '120 allow BGP on VTI1 Gateway':
+    dport   => 179,
+    proto   => tcp,
+    iniface => 'vti1',
+    action  => accept,
+  }
+
+  firewall { '120 allow BGP on VTI2 Gateway':
+    dport   => 179,
+    proto   => tcp,
+    iniface => 'vti2',
+    action  => accept,
+  }
+
+
 }
