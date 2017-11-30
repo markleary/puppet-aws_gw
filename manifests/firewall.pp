@@ -26,7 +26,17 @@ class aws_gw::firewall inherits aws_gw {
     chain             => 'FORWARD',
     table             => 'mangle',
     proto             => tcp,
-    outiface          => 'vti?',
+    outiface          => 'vti1',
+    tcp_flags         => 'SYN,RST SYN',
+    clamp_mss_to_pmtu => true,
+    jump              => 'TCPMSS',
+  }
+
+  firewall { '112 TCPMSS for Gateway':
+    chain             => 'FORWARD',
+    table             => 'mangle',
+    proto             => tcp,
+    outiface          => 'vti2',
     tcp_flags         => 'SYN,RST SYN',
     clamp_mss_to_pmtu => true,
     jump              => 'TCPMSS',
