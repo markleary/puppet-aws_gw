@@ -66,6 +66,9 @@
 #    The Virtual Private Gateway ASN provided in the AWS VPN configuration
 #    download.
 #
+#  [*config_fw*]
+#    If true, use Puppet Firewall module to configure mangle table.
+#
 
 class aws_gw(
   String $pre_shared_key_1,
@@ -95,6 +98,7 @@ class aws_gw(
   String $zebra_service     = $aws_gw::params::zebra_service,
   String $bgpd_service      = $aws_gw::params::bgpd_service,
   String $quagga_pw         = $aws_gw::params::quagga_pw,
+  Boolean $config_fw        = true,
 ) inherits aws_gw::params {
 
   anchor { 'aws_gw::begin:': }
@@ -107,5 +111,6 @@ class aws_gw(
     name   => $q_package,
   }
   -> class { 'aws_gw::config': }
+  -> if $config_fw { class { 'aws_gw::firewall': } }
   -> anchor { 'aws_gw::end': }
 }
