@@ -22,7 +22,7 @@ class aws_gw::firewall inherits aws_gw {
     jump        => 'MARK',
   }
 
-  firewall { '112 TCPMSS for Gateway':
+  firewall { '112 TCPMSS for VTI1 Gateway':
     chain             => 'FORWARD',
     table             => 'mangle',
     proto             => tcp,
@@ -32,7 +32,7 @@ class aws_gw::firewall inherits aws_gw {
     jump              => 'TCPMSS',
   }
 
-  firewall { '112 TCPMSS for Gateway':
+  firewall { '112 TCPMSS for VTI2 Gateway':
     chain             => 'FORWARD',
     table             => 'mangle',
     proto             => tcp,
