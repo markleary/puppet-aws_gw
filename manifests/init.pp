@@ -112,6 +112,6 @@ class aws_gw(
   }
   -> class { 'aws_gw::config': }
   -> if $config_fw { class { 'aws_gw::firewall': } }
-  -> class { 'aws_gs::service': }
+  -> class { 'aws_gw::service': }
   -> anchor { 'aws_gw::end': }
 }
