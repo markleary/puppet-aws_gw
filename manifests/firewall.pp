@@ -1,4 +1,4 @@
-# Class: aws_gw::config
+# Class: aws_gw::firewall
 #
 # This class configures iptables using the Firewall module
 class aws_gw::firewall inherits aws_gw {
